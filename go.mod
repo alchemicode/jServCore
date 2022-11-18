@@ -1,3 +1,3 @@
-module codealchemi.com/jServCore
+module jServCore
 
 go 1.17
