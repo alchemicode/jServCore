@@ -1,6 +1,6 @@
 module github.com/alchemicode/jServCore
 
-go 1.19
+go 1.21
 
 require (
 	github.com/pelletier/go-toml/v2 v2.1.0
