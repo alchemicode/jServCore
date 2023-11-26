@@ -1,4 +1,4 @@
-module github.com/codealchemi/jServCore
+module github.com/alchemicode/jServCore
 
 go 1.17
 
