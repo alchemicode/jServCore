@@ -10,20 +10,20 @@ import (
 )
 
 type DataObject struct {
-	Id   uint64                 `json:"id" msgpack:"id" xml:"id" toml:"id" yaml:"id"`
+	Id   string                 `json:"id" msgpack:"id" xml:"id" toml:"id" yaml:"id"`
 	Data map[string]interface{} `json:"data" msgpack:"data" xml:"data" toml:"data" yaml:"data"`
 }
 
 // Default Constructor
 // Creates an empty Object with only an id
-func (d *DataObject) WithoutData(id uint64) {
+func (d *DataObject) WithoutData(id string) {
 	d.Id = id
 	d.Data = make(map[string]interface{})
 }
 
 // Map Constructor
 // Creates an Object with given id and data map
-func (d *DataObject) WithData(id uint64, data map[string]interface{}) {
+func (d *DataObject) WithData(id string, data map[string]interface{}) {
 	d.Id = id
 	d.Data = data
 }
@@ -35,8 +35,8 @@ func (d *DataObject) FromJSON(s string) {
 	if err := json.Unmarshal([]byte(s), &dat); err != nil {
 		panic(err)
 	}
-	fmt.Println(dat["id"].(float64))
-	d.Id = uint64(dat["id"].(float64))
+	fmt.Println(dat["id"])
+	d.Id = dat["id"].(string)
 	d.Data = dat["data"].(map[string]interface{})
 }
 func (d *DataObject) FromTOML(s string) {
@@ -44,8 +44,8 @@ func (d *DataObject) FromTOML(s string) {
 	if err := toml.Unmarshal([]byte(s), &dat); err != nil {
 		panic(err)
 	}
-	fmt.Println(dat["id"].(float64))
-	d.Id = uint64(dat["id"].(float64))
+	fmt.Println(dat["id"])
+	d.Id = dat["id"].(string)
 	d.Data = dat["data"].(map[string]interface{})
 }
 func (d *DataObject) FromXML(s string) {
@@ -53,8 +53,8 @@ func (d *DataObject) FromXML(s string) {
 	if err := xml.Unmarshal([]byte(s), &dat); err != nil {
 		panic(err)
 	}
-	fmt.Println(dat["id"].(float64))
-	d.Id = uint64(dat["id"].(float64))
+	fmt.Println(dat["id"])
+	d.Id = dat["id"].(string)
 	d.Data = dat["data"].(map[string]interface{})
 }
 func (d *DataObject) FromYAML(s string) {
@@ -62,8 +62,8 @@ func (d *DataObject) FromYAML(s string) {
 	if err := yaml.Unmarshal([]byte(s), &dat); err != nil {
 		panic(err)
 	}
-	fmt.Println(dat["id"].(float64))
-	d.Id = uint64(dat["id"].(float64))
+	fmt.Println(dat["id"])
+	d.Id = dat["id"].(string)
 	d.Data = dat["data"].(map[string]interface{})
 }
 
