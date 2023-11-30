@@ -6,9 +6,10 @@ import (
 	m "github.com/vmihailenco/msgpack/v5"
 )
 
+// Represents a grouping of documents within the jServ database
 type Collection struct {
 	Name string
-	List []*DataObject
+	List []*Document
 }
 
 // Named Constructor Constructor
@@ -16,7 +17,7 @@ type Collection struct {
 // and reads its file
 func (c *Collection) New(name string) {
 	c.Name = name
-	c.List = make([]*DataObject, 0)
+	c.List = make([]*Document, 0)
 }
 
 func (c *Collection) FromMsgPack(b []byte) bool {
@@ -29,7 +30,7 @@ func (c *Collection) FromMsgPack(b []byte) bool {
 		//Reads each object in the generated data from the file
 		//and populates the collection's list
 		for i := 0; i < len(dat); i++ {
-			obj := new(DataObject)
+			obj := new(Document)
 			obj.WithData(dat[i]["id"].(string), dat[i]["data"].(map[string]interface{}))
 			c.List = append(c.List, obj)
 		}
@@ -39,7 +40,7 @@ func (c *Collection) FromMsgPack(b []byte) bool {
 }
 
 func (c Collection) ToMsgPack() ([]byte, bool) {
-	var vals []DataObject
+	var vals []Document
 	for _, d := range c.List {
 		vals = append(vals, *d)
 	}
